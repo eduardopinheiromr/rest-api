@@ -7,14 +7,14 @@ module.exports = (app) => {
     res.send("Hello World");
   });
 
-  app.get("/tarefas", (req, resp) => {
+  app.get("/tasks", (req, resp) => {
     databaseAccess
       .getAllTasks()
       .then((tasks) => resp.send(tasks))
       .catch((err) => console.log(err));
   });
 
-  app.get("/tarefas/:id", (req, resp) => {
+  app.get("/task/:id", (req, resp) => {
     const id = req.params.id;
     databaseAccess
       .getTaskBy(id)
@@ -22,7 +22,7 @@ module.exports = (app) => {
       .catch((err) => console.log(err));
   });
 
-  app.delete("/tarefas/:id", (req, resp) => {
+  app.delete("/task/:id", (req, resp) => {
     const id = req.params.id;
     databaseAccess
       .deleteTaskBy(id)
@@ -30,7 +30,7 @@ module.exports = (app) => {
       .catch((err) => console.log(err));
   });
 
-  app.put("/tarefas/:id/", (req, resp) => {
+  app.put("/task/:id/", (req, resp) => {
     const id = req.params.id;
     const content = req.body;
     databaseAccess
@@ -39,7 +39,7 @@ module.exports = (app) => {
       .catch((err) => console.log(err));
   });
 
-  app.post("/nova-tarefa", (req, resp) => {
+  app.post("/new-task", (req, resp) => {
     const content = req.body;
     databaseAccess
       .createTask(content)

@@ -1,0 +1,44 @@
+h1 {
+  font-weight: bold;
+}
+
+.add-task {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.description-input {
+  height: 100%;
+  width: 90%;
+  padding: 10px 20px;
+  border: 1px solid lightgray;
+}
+.submit-btn {
+  border-radius: 100%;
+  border: none;
+  background-color: #206e01;
+  color: white;
+  font-size: 25px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-group {
+  width: 30vw;
+  padding-right: 10px;
+}
+
+.col-8 {
+  padding-top: 70px;
+}
+
+.tab-content {
+  width: 60vw;
+  padding-left: 10px;
+}
