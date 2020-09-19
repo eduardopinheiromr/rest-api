@@ -17,24 +17,53 @@
     <title>API - ToDoApp</title>
   </head>
   <body>
-    <div class="container-fluid d-flex flex-column align-items-center">
-      <h1 class="text-center p-5">ToDoApp</h1>
-      <div class="row">
-        <div class="col-4">
-          <div class="add-task">
-            <input
-              id="description"
-              class="description-input"
-              type="text"
-              placeholder="Digite aqui o título da tarefa"
-            />
-            <button id="submit" class="submit-btn"><span>+</span></button>
-          </div>
+    <nav class="navbar navbar-light bg-light">
+      <span class="navbar-brand mb-0 h1">ToDoApp</span>
+    </nav>
+    <div class="container-fluid d-flex flex-column align-items-center p-0">
+      <div class="row d-flex justify-content-start w-100 bg-whitesmoke p-2">
+        <div class="add-task">
+          <form action="/new-task" method="post">
+            <div class="d-flex flex-column">
+              <div class="d-flex justify-content-between pb-1">
+                <h3 class="nova-tarefa-title">Nova Tarefa</h3>
+                <button id="submit" class="submit-btn" type="submit">
+                  <span>+</span>
+                </button>
+              </div>
+              <input
+                id="titulo"
+                class="title-input"
+                type="text"
+                name="titulo"
+                placeholder="Digite aqui a título da tarefa"
+              />
+              <input
+                id="description"
+                class="description-input"
+                type="text"
+                name="descricao"
+                placeholder="Digite aqui a descrição da tarefa"
+              />
+            </div>
+            <div>
+              <!-- <input
+                  type="checkbox"
+                  name="status"
+                  id="status"
+                  value="to-do"
+                /> -->
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row py-3">
+        <div class="col-6">
           <div class="list-group" id="list-tab" role="tablist">
             <!-- loaded with js -->
           </div>
         </div>
-        <div class="col-8">
+        <div class="col-6 bg-whitesmoke bradius-10 p-3">
           <div class="tab-content" id="nav-tabContent">
             <!-- loaded with js -->
           </div>

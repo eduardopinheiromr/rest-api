@@ -43,7 +43,7 @@ module.exports = (app) => {
     const content = req.body;
     databaseAccess
       .createTask(content)
-      .then((task) => resp.send(task))
+      .then(resp.redirect("/"))
       .catch((err) => console.log(err));
   });
 };
