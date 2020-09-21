@@ -55,17 +55,31 @@ function submitEditedTaskDescription(event) {
 function editTask(element) {
   let id = element.dataset.id;
   let title = document.querySelector(`#titulo-${id}`);
+  let lastEdit = title.innerText;
   title.setAttribute("contenteditable", "true");
   title.focus();
-  title.addEventListener("focusout", submitEditedTask);
+  title.addEventListener("focusout", () => {
+    let newEdit = title.innerText;
+
+    if (lastEdit !== newEdit) {
+      submitEditedTask(event);
+    }
+  });
 }
 
 function editTaskDescription(element) {
   let id = element.dataset.id;
   let description = document.querySelector(`#list-${id}`);
+  let lastEdit = description.innerText;
   description.setAttribute("contenteditable", "true");
   description.focus();
-  description.addEventListener("focusout", submitEditedTaskDescription);
+  description.addEventListener("focusout", () => {
+    let newEdit = description.innerText;
+
+    if (lastEdit !== newEdit) {
+      submitEditedTaskDescription(event);
+    }
+  });
 }
 
 async function requestAPI(endpoint) {
