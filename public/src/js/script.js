@@ -24,8 +24,6 @@ const todoapp_taskRoute = "http://localhost:8080/task/";
 const titleContainer = document.getElementById("list-tab");
 const descriptionContainer = document.getElementById("nav-tabContent");
 
-// delete btn <button onclick="deleteTask(this.id)" class="delete_btn" id="delete-btn-${id}"><img src="src/img/delete.svg"></button>
-
 function submitEditedTask(event) {
   const id = event.target.id.split("-")[1];
   const newTitle = event.target.innerText;
@@ -42,12 +40,33 @@ function submitEditedTask(event) {
   }).then(console.log("Tarefa editada com sucesso :)"));
 }
 
-async function editTask(element) {
+function submitEditedTaskDescription(event) {
+  const id = event.target.id.split("-")[1];
+  const title = document.getElementById(`titulo-${id}`).innerText;
+  const newDescription = event.target.innerText;
+  const todoapp_putTask = todoapp_taskRoute + id;
+
+  fetch(todoapp_putTask, {
+    method: "PUT",
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+    body: JSON.stringify({ titulo: title, descricao: newDescription }),
+  }).then(console.log("Tarefa editada com sucesso :)"));
+}
+
+function editTask(element) {
   let id = element.dataset.id;
   let title = document.querySelector(`#titulo-${id}`);
   title.setAttribute("contenteditable", "true");
   title.focus();
   title.addEventListener("focusout", submitEditedTask);
+}
+
+function editTaskDescription(element) {
+  let id = element.dataset.id;
+  let description = document.querySelector(`#list-${id}`);
+  description.setAttribute("contenteditable", "true");
+  description.focus();
+  description.addEventListener("focusout", submitEditedTaskDescription);
 }
 
 async function requestAPI(endpoint) {
@@ -63,8 +82,10 @@ async function renderAllTasks() {
   const taskList = data.results;
 
   taskList.forEach((task) => {
-    const { id, titulo, descricao, status } = task;
-
+    let { id, titulo, descricao, status } = task;
+    if (descricao.length === 0) {
+      descricao = "Clique aqui para adicionar uma descrição a tarefa...";
+    }
     const statusStyle = selectStatusClass(status);
     const title = `
     <a class="task list-group-item list-group-item-action ${statusStyle.title}" role="tab" aria-controls="home" id="list-home-list" data-toggle="list" href="#list-${id}">
@@ -81,7 +102,7 @@ async function renderAllTasks() {
       </div>
     </a>`;
 
-    const description = `<div class="${statusStyle.description}tab-pane fade" id="list-${id}" role="tabpanel" aria-labelledby="list-home-list">${descricao}</div>`;
+    const description = `<div class="${statusStyle.description}tab-pane fade" id="list-${id}" role="tabpanel" aria-labelledby="list-home-list" data-id="${id}" onclick="editTaskDescription(this)">${descricao}</div>`;
 
     titleContainer.innerHTML += title;
     descriptionContainer.innerHTML += description;
@@ -94,13 +115,6 @@ function reloadTasks() {
 
   renderAllTasks();
 }
-
-function openMenu(id) {
-  console.log(id);
-}
-// const deleteBtn = document.querySelector(".delete-btn");
-
-// deleteBtn.addEventListener("click", deleteTask);
 
 function deleteTask(idName) {
   let id = idName.split("-");

@@ -58,7 +58,6 @@ class DatabaseAccess {
   }
 
   createTask(content) {
-    console.log(content);
     return new Promise((resolve, reject) => {
       const { titulo, descricao, status } = content;
       this._db.run(
