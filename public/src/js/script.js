@@ -16,26 +16,44 @@
 // http://localhost:8080/1 - DELETE A TASK THAT ID IS EQUAL TO 1
 
 const submit = document.querySelector("#submit");
+const title = document.querySelectorAll(".title");
+const edit = document.querySelectorAll(".edit-btn");
 const description = document.querySelector("#description");
 const todoapp_allTasks = "http://localhost:8080/tasks";
+const todoapp_taskRoute = "http://localhost:8080/task/";
 const titleContainer = document.getElementById("list-tab");
 const descriptionContainer = document.getElementById("nav-tabContent");
 
 // delete btn <button onclick="deleteTask(this.id)" class="delete_btn" id="delete-btn-${id}"><img src="src/img/delete.svg"></button>
 
-submit.addEventListener("click", postTask);
-async function postTask() {
-  //...
+function submitEditedTask(event) {
+  const id = event.target.id.split("-")[1];
+  const newTitle = event.target.innerText;
+  const todoapp_putTask = todoapp_taskRoute + id;
+
+  fetch(todoapp_putTask, {
+    method: "PUT",
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+    body: JSON.stringify({
+      titulo: newTitle,
+      descricao: "Testando",
+      status: "to-do",
+    }),
+  }).then(console.log("Tarefa editada com sucesso :)"));
+}
+
+async function editTask(element) {
+  let id = element.dataset.id;
+  let title = document.querySelector(`#titulo-${id}`);
+  title.setAttribute("contenteditable", "true");
+  title.focus();
+  title.addEventListener("focusout", submitEditedTask);
 }
 
 async function requestAPI(endpoint) {
   const response = await fetch(endpoint);
   const data = await response.json();
   return data;
-}
-
-async function printResult() {
-  console.log(await requestAPI(todoapp_allTasks));
 }
 
 async function renderAllTasks() {
@@ -48,9 +66,23 @@ async function renderAllTasks() {
     const { id, titulo, descricao, status } = task;
 
     const statusStyle = selectStatusClass(status);
-    const title = `<a class="task list-group-item list-group-item-action ${statusStyle.title}" role="tab" aria-controls="home" id="list-home-list" data-toggle="list" href="#list-${id}"><div>${titulo}<div><button onclick="editTask(this.id)" class="edit_btn" id="edit-btn-${id}"><img src="src/img/edit.svg"></button><button onclick="deleteTask(this.id)" class="delete_btn" id="delete-btn-${id}"><img src="src/img/delete.svg"></button></div></div></a>`;
+    const title = `
+    <a class="task list-group-item list-group-item-action ${statusStyle.title}" role="tab" aria-controls="home" id="list-home-list" data-toggle="list" href="#list-${id}">
+      <div>
+        <span class="title" id="titulo-${id}">${titulo}</span>
+        <div>
+          <button data-id="${id}" onclick="editTask(this)" class="edit_btn" id="edit-btn-${id}">
+            <img src="src/img/edit.svg">
+          </button>
+          <button onclick="deleteTask(this.id)" class="delete_btn" id="delete-btn-${id}">
+            <img src="src/img/delete.svg">
+          </button>
+        </div>
+      </div>
+    </a>`;
+
     const description = `<div class="${statusStyle.description}tab-pane fade" id="list-${id}" role="tabpanel" aria-labelledby="list-home-list">${descricao}</div>`;
-    // future implementation <button onclick="openMenu(this.id)" class="toggle-menu" id="toggle-menu${id}"><img src="src/img/menu.svg"></button></div><div class="toggle-menu-options"></div>
+
     titleContainer.innerHTML += title;
     descriptionContainer.innerHTML += description;
   });

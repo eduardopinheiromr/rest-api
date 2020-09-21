@@ -111,6 +111,12 @@ h1 {
   height: 20px;
 }
 
+/* EDIT */
+
+.title {
+  width: 80%;
+}
+
 .list-group {
   height: 400px;
   width: 40vw;
