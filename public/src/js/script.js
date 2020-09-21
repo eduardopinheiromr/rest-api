@@ -16,17 +16,16 @@
 // http://localhost:8080/1 - DELETE A TASK THAT ID IS EQUAL TO 1
 
 const submit = document.querySelector("#submit");
-const title = document.querySelectorAll(".title");
-const edit = document.querySelectorAll(".edit-btn");
 const description = document.querySelector("#description");
-const todoapp_allTasks = "http://localhost:8080/tasks";
-const todoapp_taskRoute = "http://localhost:8080/task/";
 const titleContainer = document.getElementById("list-tab");
 const descriptionContainer = document.getElementById("nav-tabContent");
+const todoapp_allTasks = "http://localhost:8080/tasks";
+const todoapp_taskRoute = "http://localhost:8080/task/";
 
 function submitEditedTask(event) {
   const id = event.target.id.split("-")[1];
   const newTitle = event.target.innerText;
+  const description = document.getElementById(`list-${id}`).innerText;
   const todoapp_putTask = todoapp_taskRoute + id;
 
   fetch(todoapp_putTask, {
@@ -34,7 +33,7 @@ function submitEditedTask(event) {
     headers: { "Content-type": "application/json; charset=UTF-8" },
     body: JSON.stringify({
       titulo: newTitle,
-      descricao: "Testando",
+      descricao: description,
       status: "to-do",
     }),
   }).then(console.log("Tarefa editada com sucesso :)"));
@@ -88,7 +87,7 @@ async function renderAllTasks() {
     }
     const statusStyle = selectStatusClass(status);
     const title = `
-    <a class="task list-group-item list-group-item-action ${statusStyle.title}" role="tab" aria-controls="home" id="list-home-list" data-toggle="list" href="#list-${id}">
+    <a class="task task-${id} list-group-item list-group-item-action ${statusStyle.title}" role="tab" aria-controls="home" id="list-home-list" data-toggle="list" href="#list-${id}">
       <div>
         <span class="title" id="titulo-${id}">${titulo}</span>
         <div>
@@ -109,11 +108,17 @@ async function renderAllTasks() {
   });
 }
 
-function reloadTasks() {
-  titleContainer.innerHTML = "";
-  descriptionContainer.innerHTML = "";
+function reloadTasks(lastMove, id) {
+  if (lastMove === "put") {
+    console.log(lastMove);
+  } else if (lastMove === "post") {
+    console.log(lastMove);
+  } else if (lastMove === "delete") {
+    const title = document.querySelector(`.task-${id}`);
+    const description = document.querySelector(`#list-${id}`);
 
-  renderAllTasks();
+    title.style.display = description.style.display = "none";
+  }
 }
 
 function deleteTask(idName) {
@@ -126,7 +131,7 @@ function deleteTask(idName) {
     fetch(`http://localhost:8080/task/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    }).then(reloadTasks());
+    }).then(reloadTasks("delete", id));
   }
 }
 

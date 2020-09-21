@@ -31,11 +31,8 @@ module.exports = (app) => {
   });
 
   app.put("/task/:id/", (req, resp) => {
-    console.log("put task executada");
     const id = req.params.id;
     const content = req.body;
-    console.log(content);
-    console.log(content.titulo);
     databaseAccess
       .editTaskBy(id, content)
       .then((task) => resp.send(task))
@@ -44,7 +41,6 @@ module.exports = (app) => {
 
   app.post("/new-task", (req, resp) => {
     const content = req.body;
-    console.log(content);
     databaseAccess
       .createTask(content)
       .then(resp.redirect("/"))
