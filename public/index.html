@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="Description" content="Enter your description here" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <title>API - ToDoApp</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <span class="navbar-brand mb-0 h1">ToDoApp</span>
+    </nav>
+    <div class="container-fluid d-flex flex-column align-items-center p-0">
+      <div class="row d-flex justify-content-start w-100 bg-whitesmoke p-2">
+        <div class="add-task">
+          <form action="/new-task" method="post">
+            <div class="d-flex flex-column">
+              <div class="d-flex justify-content-between pb-1">
+                <h3 class="nova-tarefa-title">Nova Tarefa</h3>
+                <button id="submit" class="submit-btn" type="submit">
+                  <span>+</span>
+                </button>
+              </div>
+              <input
+                id="titulo"
+                class="title-input"
+                type="text"
+                name="titulo"
+                placeholder="Digite aqui a título da tarefa"
+              />
+              <input
+                id="description"
+                class="description-input"
+                type="text"
+                name="descricao"
+                placeholder="Digite aqui a descrição da tarefa"
+              />
+            </div>
+            <div>
+              <!-- <input
+                  type="checkbox"
+                  name="status"
+                  id="status"
+                  value="to-do"
+                /> -->
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row py-3">
+        <div class="col-6">
+          <div class="list-group" id="list-tab" role="tablist">
+            <!-- loaded with js -->
+          </div>
+        </div>
+        <div class="col-6 bg-whitesmoke bradius-10 p-3">
+          <div class="tab-content" id="nav-tabContent">
+            <!-- loaded with js -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <script src="src/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

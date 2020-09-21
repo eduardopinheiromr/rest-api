@@ -12,7 +12,9 @@ routes(app);
 const port = 8080;
 
 app.listen(port, () => {
+  const time = new Date();
   console.log(
-    "\nServidor iniciado em http://localhost:" + port + "\n\n\n\n\n\n"
+    `\nServidor iniciado em http://localhost:${port}\n\n
+    Iniciado em: ${time}\n\n\n\n`
   );
 });

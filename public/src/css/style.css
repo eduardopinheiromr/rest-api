@@ -1,0 +1,143 @@
+body {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+h1 {
+  font-weight: bold;
+}
+.bg-whitesmoke {
+  background: whitesmoke;
+}
+
+.bradius-10 {
+  border-radius: 10px;
+}
+/* FORM */
+
+.add-task {
+  padding-left: 115px;
+}
+.add-task form {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.nova-tarefa-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: auto 0;
+}
+
+.title-input {
+  height: 40x;
+  width: 300px;
+  padding: 5px 10px;
+  border: 1px solid lightgray;
+  margin-bottom: 10px;
+}
+
+.description-input {
+  height: 40px;
+  width: 300px;
+  padding: 5px 10px;
+  border: 1px solid lightgray;
+}
+.submit-btn {
+  border-radius: 100%;
+  border: none;
+  background-color: #206e01;
+  color: white;
+  font-size: 25px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FIM DO FORM */
+
+.task div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* TOGGLE MENU */
+.toggle-menu {
+  height: 40px;
+  width: 20px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: none;
+}
+
+.toggle-menu img {
+  height: 20px;
+}
+
+.toggle-menu-options {
+  display: flex;
+  align-items: center;
+  background: whitesmoke;
+  border-bottom: 1px solid lightgray;
+  width: 150px;
+}
+
+/* DELETE BTN */
+
+.delete_btn,
+.edit_btn {
+  margin-left: 10px;
+  border: none;
+  background: white;
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete_btn img,
+.edit_btn img {
+  height: 20px;
+}
+
+/* EDIT */
+
+.title {
+  width: 80%;
+}
+
+.list-group {
+  height: 400px;
+  width: 40vw;
+  overflow-y: scroll;
+  padding-right: 2px;
+}
+
+.tab-content {
+  overflow-y: scroll;
+  width: 40vw;
+  padding-left: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  background: lightgray;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: lightgray;
+}

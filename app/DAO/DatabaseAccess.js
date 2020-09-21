@@ -35,7 +35,7 @@ class DatabaseAccess {
           console.log(err);
           return reject("Não foi possível deletar a tarefa.");
         }
-        return resolve(`Tarefa ${req.params.id} foi deletada com sucesso`);
+        return resolve(`Tarefa ${id} foi deletada com sucesso`);
       });
     });
   }
