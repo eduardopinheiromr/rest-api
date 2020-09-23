@@ -9,7 +9,7 @@ const routes = require("./app/routes/routes");
 routes(app);
 
 // LOAD SERVER
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   const time = new Date();
