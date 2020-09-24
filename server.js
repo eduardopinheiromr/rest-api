@@ -9,12 +9,12 @@ const routes = require("./app/routes/routes");
 routes(app);
 
 // LOAD SERVER
-const port = process.env.PORT;
+app.set("port", process.env.PORT || 3000);
 
-app.listen(port, () => {
-  const time = new Date();
-  console.log(
-    `\nServidor iniciado em http://localhost:${port}\n\n
-    Iniciado em: ${time}\n\n\n\n`
-  );
-});
+// app.listen(port, () => {
+//   const time = new Date();
+//   console.log(
+//     `\nServidor iniciado em http://localhost:${port}\n\n
+//     Iniciado em: ${time}\n\n\n\n`
+//   );
+// });
