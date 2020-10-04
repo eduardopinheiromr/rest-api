@@ -11,6 +11,7 @@ routes(app);
 // LOAD SERVER
 app.set("port", process.env.PORT || 3000);
 
+// const port = 3000;
 // app.listen(port, () => {
 //   const time = new Date();
 //   console.log(

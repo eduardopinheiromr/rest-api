@@ -1,26 +1,12 @@
-// ENDPOINTS
+// To know more about this api, check the README on https://github.com/eduardopinheiromr/rest-api
 
-// GET
-// http://localhost:8080/tasks - RETURN ALL TASKS IN JSON
-// http://localhost:8080/task/1 - RETURN TASK THAT ID IS EQUAL TO 1
-
-// POST
-// http://localhost:8080/new-task - CREATE A NEW TASK
-// BODY OF OBJECT NEEDS TITLE, DESCRIPTION AND STATUS
-
-// PUT
-// http://localhost:8080/1 - EDIT A TASK THAT ID IS EQUAL TO 1
-// BODY OF OBJECT NEEDS TITLE, DESCRIPTION AND STATUS
-
-// DELETE
-// http://localhost:8080/1 - DELETE A TASK THAT ID IS EQUAL TO 1
-
+const url = window.location.href.toString();
 const submit = document.querySelector("#submit");
 const description = document.querySelector("#description");
 const titleContainer = document.getElementById("list-tab");
 const descriptionContainer = document.getElementById("nav-tabContent");
-const todoapp_allTasks = "http://localhost:8080/tasks";
-const todoapp_taskRoute = "http://localhost:8080/task/";
+const todoapp_allTasks = url + "tasks";
+const todoapp_taskRoute = url + "task/";
 
 function submitEditedTask(event) {
   const id = event.target.id.split("-")[1];
@@ -142,7 +128,7 @@ function deleteTask(idName) {
   let deleteConfirmation = confirm("Tem deseja que deseja excluir esta nota?");
 
   if (deleteConfirmation == true) {
-    fetch(`http://localhost:8080/task/${id}`, {
+    fetch(`${todoapp_taskRoute}${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     }).then(reloadTasks("delete", id));
