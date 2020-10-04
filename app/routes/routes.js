@@ -1,49 +1,21 @@
-const db = require("../config/db");
-const DatabaseAccess = require("../DAO/DatabaseAccess");
-const databaseAccess = new DatabaseAccess(db);
+const TaskController = require("../controller/tasks");
+
+const routes = {
+  create: "/new-task",
+  readAll: "/tasks",
+  readOne: "/task/:id",
+  update: "/task/:id/",
+  delete: "/task/:id",
+};
 
 module.exports = (app) => {
-  app.get("/", (req, res) => {
-    res.send("Hello World");
-  });
+  app.get(routes.readAll, TaskController.readAllTasks());
 
-  app.get("/tasks", (req, resp) => {
-    databaseAccess
-      .getAllTasks()
-      .then((tasks) => resp.send(tasks))
-      .catch((err) => console.log(err));
-  });
+  app.get(routes.readOne, TaskController.readOneTask());
 
-  app.get("/task/:id", (req, resp) => {
-    const id = req.params.id;
-    databaseAccess
-      .getTaskBy(id)
-      .then((task) => resp.send(task))
-      .catch((err) => console.log(err));
-  });
+  app.delete(routes.delete, TaskController.deleteTask());
 
-  app.delete("/task/:id", (req, resp) => {
-    const id = req.params.id;
-    databaseAccess
-      .deleteTaskBy(id)
-      .then((task) => resp.send(task))
-      .catch((err) => console.log(err));
-  });
+  app.put(routes.update, TaskController.updateTask());
 
-  app.put("/task/:id/", (req, resp) => {
-    const id = req.params.id;
-    const content = req.body;
-    databaseAccess
-      .editTaskBy(id, content)
-      .then((task) => resp.send(task))
-      .catch((err) => console.log(err));
-  });
-
-  app.post("/new-task", (req, resp) => {
-    const content = req.body;
-    databaseAccess
-      .createTask(content)
-      .then(resp.redirect("/"))
-      .catch((err) => console.log(err));
-  });
+  app.post(routes.create, TaskController.createTask());
 };
